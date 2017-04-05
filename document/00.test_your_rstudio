@@ -1,0 +1,187 @@
+---
+title: "Test Your Rstudio"
+author: "Yao He"
+date: "`r doc_date()`"
+abstract: >
+  Run these code in your RStudio and check the output with this document
+vignette: >
+  %\VignetteIndexEntry{Test Your Rstudio}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+output: 
+  BiocStyle::html_document
+---
+
+# First Impression
+
+Type values and mathematical formulas into R’s command prompt
+```{r rmarkdown}
+1 + 1
+```
+
+Assign values to symbols (variables)
+```{r}
+x = 1
+x + x
+```
+
+Invoke functions such as c(), which takes any number of values and returns a single vector
+```{r}
+x = c(1, 2, 3)
+x
+```
+
+R functions, such as sqrt(), often operate efficienty on vectors
+```{r}
+y = sqrt(x)
+y
+```
+
+
+# R Data types: vector and list
+
+‘Atomic’ vectors
+
+* Types include integer, numeric (float-point; real), complex, logical, character, raw (bytes)
+
+```{r}
+people <- c("Lori", "Yubo", "Greg", "Nitesh", "Valerie", "Herve")
+people
+```
+
+* Atomic vectors can be named
+```{r}
+population <- c(Buffalo=259000, Rochester=210000, `New York`=8400000)
+population
+log10(population)
+```
+
+* Statistical concepts like NA (“not available”)
+```{r}
+truthiness <- c(TRUE, FALSE, NA)
+truthiness
+```
+
+* Logical concepts like ‘and’ (&), ‘or’ (|), and ‘not’ (!)
+```{r}
+!truthiness
+truthiness | !truthiness
+truthiness & !truthiness
+```
+
+* Numerical concepts like infinity (Inf) or not-a-number (NaN, e.g., 0 / 0)
+```{r}
+undefined_numeric_values <- c(NA, 0/0, NaN, Inf, -Inf)
+undefined_numeric_values
+sqrt(undefined_numeric_values)
+```
+
+* Common string manipulations
+```{r}
+toupper(people)
+substr(people, 1, 3)
+
+```
+
+* R is a green consumer – recylcing short vectors to align with long vectors
+```{r}
+x <- 1:3
+x * 2
+truthiness | NA
+truthiness & NA
+```
+
+* It’s very common to nest operations, which can be simultaneously compact, confusing, and expressive (`[`: subset; `<`: less than)
+```{r}
+substr(tolower(people), 1, 3)
+population[population < 1000000]
+```
+
+# Class data.frame and beyond
+
+Variables are often related to one another in a highly structured way, e.g., two ‘columns’ of data in a spreadsheet
+```{r}
+x = rnorm(1000)       # 1000 random normal deviates
+y = x + rnorm(1000)   # another 1000 deviates, as a function of x
+head(x)
+head(y)
+plot(y ~ x)           # relationship bewteen x and y
+```
+
+Convenient to manipulate them together
+
+* `data.frame()` :like columns in a spreadsheet
+```{r}
+df = data.frame(X=x, Y=y)
+head(df)           # first 6 rows
+plot(Y ~ X, df)    # same as above
+```
+
+* See all data with `View(df)`. Summarize data with `summary(df)`
+```{r}
+summary(df)
+```
+
+* Easy to manipulate data in a coordinated way, e.g., access column X with $ and subset for just those values greater than 0
+```{r}
+positiveX = df[df$X > 0,]
+head(positiveX)
+plot(Y ~ X, positiveX)
+```
+
+* R is introspective – ask it about itself
+```{r}
+class(df)
+dim(df)
+colnames(df)
+```
+
+A scatterplot makes one want to fit a linear model (do a regression analysis)
+
+* Use a *formula* to describe the relationship between variables
+* Variables found in the second argument
+```{r }
+fit <- lm(Y ~ X, df)
+``` 
+* Visualize the points, and add the regression line
+```{r}
+plot(Y ~ X, df)
+abline(fit, col="red", lwd=3)
+```           
+
+
+
+# Help!
+Help available in Rstudio or interactively
+
+* Check out the help page for rnorm()
+```{r}
+?rnorm
+```
+
+* Usage’ section describes how the function can be used
+
+* Arguments, some with default values. Arguments matched first by name, then position
+
+* Arguments’ section describes what the arguments are supposed to be
+
+* ‘Value’ section describes return value
+
+* ‘Examples’ section illustrates use
+
+* Often include citations to relevant technical documentation, reference to related functions, obscure details
+
+* Can be intimidating, but in the end actually very useful
+
+# Session info
+
+Here is the output of `sessionInfo()` on the system on which this
+document was compiled:
+
+```{r sessionInfo, echo=FALSE}
+sessionInfo()
+```
+
+
+[R]: http://r-project.org
+[RStudio]: http://www.rstudio.com/
