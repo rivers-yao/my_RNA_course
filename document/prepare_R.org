@@ -1,0 +1,22 @@
+ * 安装Ｒ语言
+   在以下链接下载相应版本的Ｒ语言，并点击进行安装
+
+   [[https://mirrors.tuna.tsinghua.edu.cn/CRAN/]]
+
+  #+CAPTION: CRAN R 语言下载页面
+
+   [[https://raw.githubusercontent.com/rivers-yao/my_RNA_course/master/figures/prepare/cran_download.png]] 
+   
+ * 安装ＲStudio
+   点击以下链接下载相应版本的 Rstudio，并点击进行安装
+
+   [[https://www.rstudio.com/products/rstudio/download/]]
+
+  #+CAPTION: CRAN R 语言下载页面
+
+   [[https://raw.githubusercontent.com/rivers-yao/my_RNA_course/master/figures/prepare/rstudio_download.png]]
+
+ *　测试你的Ｒ和Ｒstudio 是否安装成功
+ 　打开你的 Rstudio，阅读链接中的文档，并亲手运行文档中的代码
+
+ [[http://htmlpreview.github.io/?https://github.com/rivers-yao/my_RNA_course/blob/master/document/00.test_your_rstudio.html]]
